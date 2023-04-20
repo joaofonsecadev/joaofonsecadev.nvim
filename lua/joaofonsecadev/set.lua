@@ -1,9 +1,9 @@
 vim.opt.mouse = nil
-vim.cmd.colorscheme "catppuccin-mocha"
 
 vim.opt.guicursor = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.splitbelow = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

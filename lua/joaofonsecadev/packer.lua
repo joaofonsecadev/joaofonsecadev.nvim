@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
         -- or                            , branch = '0.1.x',
 	    requires = { {'nvim-lua/plenary.nvim'} }
     }
-    use { "catppuccin/nvim", as = "catppuccin" }
+    use {'morhetz/gruvbox', config = function() vim.cmd.colorscheme("gruvbox") end }
     use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use ("mbbill/undotree")
    
@@ -16,8 +16,26 @@ return require('packer').startup(function(use)
         "Pocco81/auto-save.nvim",
         config = function()
             require("auto-save").setup {
-                -- your config goes here
-                -- or just leave it empty :)
             }	end,})
-    use("tpope/vim-fugitive")
+            use("tpope/vim-fugitive")
+            use {
+                'VonHeikemen/lsp-zero.nvim',
+                branch = 'v2.x',
+                requires = {
+                    -- LSP Support
+                    {'neovim/nvim-lspconfig'},             -- Required
+                    {                                      -- Optional
+                    'williamboman/mason.nvim',
+                    run = function()
+                        pcall(vim.cmd, 'MasonUpdate')
+                    end,
+                },
+                {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+                -- Autocompletion
+                {'hrsh7th/nvim-cmp'},     -- Required
+                {'hrsh7th/cmp-nvim-lsp'}, -- Required
+                {'L3MON4D3/LuaSnip'},     -- Required
+            }
+        }
 end)
